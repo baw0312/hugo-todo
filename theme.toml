@@ -1,0 +1,12 @@
+name = "Todo"
+license = "MIT"
+licenselink = "https://github.com/nguyentodo/hugo-todo/blob/master/LICENSE"
+description = "A simple, clean, flexible Hugo theme."
+homepage = "https://github.com/nguyentodo/hugo-todo"
+tags = ["Roboto", "Lato", "Roboto Slab", "bootstrap", "font awesome", "minimal", "clean"]
+features = ["blog", "pages", "minimal", "responsive", "404", "icons", "disqus", "anlaytics"]
+min_version = 0.16
+
+[author]
+  name = "Nguyen Nguyen"
+  homepage = "https://github.com/nguyentodo"

@@ -1,0 +1,70 @@
+{{ partial "header.html" . }}
+
+<header class="row text-center header">
+  {{ with .Site.Params.authorimage }} <img src="/img/{{ . }}" alt="Author Image"
+    class="img-circle text-center headshot"> {{ end }}
+  <h1 class="author">{{ .Site.Params.author }}</h1>
+</header>
+
+<section id="info-pane" class="row text-center info">
+  {{ with .Site.Params.description }}
+  <h4 class="description">{{ . | markdownify }}</h4>
+  {{ end }}
+</section>
+
+<section id="social-pane" class="row text-center social">
+  {{ with .Site.Params.social.github }}
+  <a href="https://github.com/{{.}}" aria-label="Github" target="_blank"><i class="fab fa-github"
+      aria-hidden="true"></i></a>
+  {{ end }}
+  {{ with .Site.Params.social.instagram }}
+  <a href="https://instagram.com/{{.}}" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"
+      aria-hidden="true"></i></a>
+  {{ end }}
+  {{ with .Site.Params.social.linkedin }}
+  <a href="https://linkedin.com/in/{{.}}" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin"
+      aria-hidden="true"></i></a>
+  {{ end }}
+  {{ with .Site.Params.social.stackoverflow }}
+  <a href="https://stackoverflow.com/users/{{.}}" aria-label="StackOverflow" target="_blank"><i
+      class="fab fa-stack-overflow" aria-hidden="true"></i></a>
+  {{ end }}
+  {{ with .Site.Params.social.keybase}}
+  <a href="https://keybase.io/{{.}}" aria-label="Keybase" target="_blank"><i class="fab fa-keybase"
+      aria-hidden="true"></i></a>
+  {{ end }}
+  {{ with .Site.Params.social.telegram}}
+  <a href="https://t.me/{{.}}" aria-label="Telegram" target="_blank"><i class="fab fa-telegram"
+      aria-hidden="true"></i></a>
+  {{ end }}
+  {{ with .Site.Params.social.email }}
+  <a href="mailto:{{.}}" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+  {{ end }}
+</section>
+
+{{ if .Site.Params.extra.socialmarkup }}
+<script type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "Person",
+"name": "{{ .Site.Params.author }}",
+"url": "{{ .Site.Params.baseURL }}",
+"sameAs": [
+  {{ with .Site.Params.social.github }}"https://github.com/{{.}}",{{ end }}
+  {{ with .Site.Params.social.linkedin }}"https://linkedin.com/in/{{.}}",{{ end }}
+  {{ with .Site.Params.social.stackoverflow }}"https://stackoverflow.com/users/{{.}}",{{ end }}
+  {{ with .Site.Params.social.keybase}}"https://keybase.io/{{.}}",{{ end }}
+  {{ with .Site.Params.social.instagram }}"https://instagram.com/{{.}}",{{ end }}
+  "{{ .Site.Params.baseURL }}"
+]
+}
+</script>
+{{ end }}
+
+<section id="main-menu-pane" class="row text-center main-menu">
+  {{ range sort .Site.Menus.main }}
+  <h4><a class="menu-item" href="{{ .URL }}">{{ .Name | lower }}</a></h4>
+  {{ end }}
+</section>
+
+{{ partial "footer.html" . }}
