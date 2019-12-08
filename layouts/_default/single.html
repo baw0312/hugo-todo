@@ -3,10 +3,10 @@
 <header class="row text-left post-single">
   <h1 class="post-title">{{ .Title }}</h1>
 </header>
-<section class="row meta">
+<section class="row post-meta">
   {{ if ne .Params.showpagemeta false }}
   <div class="col-md-12">
-    <h6 class="text-left meta">
+    <h6 class="text-left post-meta">
       {{ if not .Date.IsZero }} PUBLISHED ON {{ .Date.Format .Site.Params.dateformat | upper }} {{end}}
       {{ if isset .Params "categories" }}
       {{ $total := len .Params.categories }}
@@ -14,7 +14,7 @@
       —
       {{ $total := sub $total 1 }}
       {{ range $i, $cat := sort $.Params.categories }}
-      <a class="meta"
+      <a class="post-meta"
         href="{{ "/categories/" | relURL }}{{ $cat | urlize }}">{{ $cat | upper }}</a>{{ if lt $i $total }},
       {{ end }}
       {{ end }}
@@ -24,7 +24,7 @@
   </div>
   {{ end }}
 </section>
-<section id="content-pane" class="row">
+<section class="row">
   <div class="col-md-12 text-justify content">
     {{ if and ( ne .Params.toc false) (gt .WordCount 300 ) }}
     {{ .TableOfContents }}
@@ -32,17 +32,18 @@
     {{ .Content }}
   </div>
 </section>
-<section id="tag-pane" class="row meta">
+<section class="row post-meta">
   {{ if ne .Params.showpagemeta false }}
   <div class="col-md-12">
-    <h6 class="text-left meta">
+    <h6 class="text-left post-meta">
       {{ if isset .Params "tags" }}
       {{ $total := len .Params.tags }}
       {{ if gt $total 0 }}
       TAGS:
       {{ $subtotal := sub $total 1 }}
       {{ range $i, $tag := sort $.Params.tags }}
-      <a class="meta" href="{{ "/tags/" | relURL }}{{ $tag | urlize }}">{{ $tag | upper }}</a>{{ if lt $i $subtotal }},
+      <a class="post-meta"
+        href="{{ "/tags/" | relURL }}{{ $tag | urlize }}">{{ $tag | upper }}</a>{{ if lt $i $subtotal }},
       {{ end }}
       {{ end }}
       {{ end }}
@@ -51,7 +52,7 @@
   </div>
   {{ end }}
 </section>
-<section id="menu-pane" class="row menu text-center">
+<section class="row menu text-center">
   <span><a class="menu-item" href="{{ .Section | relURL }}">{{ .Section | lower }}</a></span>
 </section>
 

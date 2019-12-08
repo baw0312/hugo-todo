@@ -1,18 +1,18 @@
 {{ partial "header.html" . }}
 
 <header class="row text-center header">
-  {{ with .Site.Params.authorimage }} <img src="/img/{{ . }}" alt="Author Image"
-    class="img-circle text-center headshot"> {{ end }}
+  {{ with .Site.Params.authorimage }} <img src="/img/{{ . }}" alt="Author Image" class="img-circle text-center avatar">
+  {{ end }}
   <h1 class="author">{{ .Site.Params.author }}</h1>
 </header>
 
-<section id="info-pane" class="row text-center info">
+<section class="row text-center info">
   {{ with .Site.Params.description }}
   <h4 class="description">{{ . | markdownify }}</h4>
   {{ end }}
 </section>
 
-<section id="social-pane" class="row text-center social">
+<section class="row text-center social">
   {{ with .Site.Params.social.github }}
   <a href="https://github.com/{{.}}" aria-label="Github" target="_blank"><i class="fab fa-github"
       aria-hidden="true"></i></a>
@@ -61,7 +61,7 @@
 </script>
 {{ end }}
 
-<section id="main-menu-pane" class="row text-center main-menu">
+<section class="row text-center main-menu">
   {{ range sort .Site.Menus.main }}
   <h4><a class="menu-item" href="{{ .URL }}">{{ .Name | lower }}</a></h4>
   {{ end }}
