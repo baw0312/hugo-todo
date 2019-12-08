@@ -2,22 +2,22 @@
 
 {{ $pctx := . }}
 {{ $paginator := .Paginate (where $pctx.RegularPages "Type" "in" .Site.Params.mainSections) }}
-<section id="list-pane" class="row list">
+<section class="row post">
   <ul>
     {{ if gt $paginator.TotalPages 0 }}
     {{ range $index, $page := $paginator.Pages }}
-    <li class="list-entry">
-      <a class="list-entry-link" href="{{ .Permalink }}">{{ .Title }}</a>
-      <p class="meta">
+    <li class="post-entry">
+      <a class="post-entry-link" href="{{ .Permalink }}">{{ .Title }}</a>
+      <p class="post-meta">
         {{ if not .Date.IsZero }} {{ .Date.Format .Site.Params.dateformat | upper }} {{end}}
-        <span class="category">
+        <span class="post-link">
           {{ if isset .Params "categories" }}
           {{ $total := len .Params.categories }}
           {{ if gt $total 0 }}
           —
           {{ $total := sub $total 1 }}
           {{ range $i, $cat := sort .Params.categories }}
-          <a class="category"
+          <a class="post-link"
             href="{{ "/categories/" | relURL }}{{ $cat | humanize | urlize }}">{{ $cat | upper }}</a>{{ if lt $i $total }},
           {{ end }}
           {{ end }}
@@ -25,7 +25,7 @@
           {{ end }}
         </span>
       </p>
-      <p class="excerpt">
+      <p class="post-excerpt">
         {{ .Summary | plainify | htmlUnescape }}...
       </p>
     </li>
@@ -34,19 +34,18 @@
   </ul>
 </section>
 {{ if gt $paginator.TotalPages 1 }}
-<section id="menu-pane" class="row menu text-center">
+<section class="row menu text-center">
   {{ if $paginator.HasPrev }}
-  <span><a class="menu-item" href="{{ $paginator.Prev.URL }}">&lt; prev | </a></span>
+  <span><a class="menu-item" href="{{ $paginator.Prev.URL }}">prev | </a></span>
   {{ end }}
   {{ if (or ($paginator.HasPrev) ($paginator.HasNext)) }}
   <span><a class="menu-item" href="{{ .Section | relURL }}">{{ .Section | lower }}</a></span>
   {{ end }}
   {{ if $paginator.HasNext }}
-  <span><a class="menu-item" href="{{ $paginator.Next.URL }}"> | next &gt;</a></span>
+  <span><a class="menu-item" href="{{ $paginator.Next.URL }}"> | next</a></span>
   {{ end }}
   <h4 class="text-center"><a class="menu-item" href="{{ .Site.BaseURL }}">home</a></h4>
 </section>
 {{ end }}
-
 
 {{ partial "footer.html" . }}
